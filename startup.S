@@ -10,6 +10,7 @@
 
 .section .text
 
+.thumb_func
 _start:
 #if 0
 /* Copy .data section */
@@ -49,16 +50,16 @@ _start:
 
 .ltorg
 
+.thumb_func
 Default_IRQHandler:
 1:	b 1b /* Halt and catch fire since we probably would implicitly do the same without the handler in many cases */
 
 .section .irq_vectors
-.thumb
 
 vectors:
 /* SYSTEM */
 	.word 0				/* - */
-	.word _start+1			/* Reset */
+	.word _start			/* Reset */
 	.word NMI_IRQHandler		/* Non-maskable interrupt */
 	.word HardFault_IRQHandler	/* Hard fault */
 	.word MemManage_IRQHandler	/* Memory management */
