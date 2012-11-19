@@ -1,5 +1,11 @@
 #include <stdint.h>
 
+#define __packed __attribute__((packed))
+/*
+ * Peripheral name:	FSMC control register
+ * Boundary:		0xA000 0000 - 0xA000 0FFF
+ */
+
 extern volatile struct {
 	uint32_t BCR1;
 	uint32_t BTR1;
@@ -48,34 +54,27 @@ extern volatile struct {
 	uint32_t BWTR3;
 	uint32_t _dummy_8;
 	uint32_t BWTR4;
-} FSMC;
+} __packed FSMC;
+
+
+
+/*
+ * Peripheral name:	RNG
+ * Boundary:		0x5006 0800 - 0x5006 0BFF
+ */
 
 extern volatile struct {
 	uint32_t CR;
 	uint32_t SR;
-	uint32_t DIN;
-	uint32_t DOUT;
-	/* 0x10 */
-	uint32_t DMACR;
-	uint32_t IMSCR;
-	uint32_t RISR;
-	uint32_t MISR;
-	/* 0x20 */
-	uint32_t K0LR;
-	uint32_t K0RR;
-	uint32_t K1LR;
-	uint32_t K1RR;
-	/* 0x30 */
-	uint32_t K2LR;
-	uint32_t K2RR;
-	uint32_t K3LR;
-	uint32_t K3RR;
-	/* 0x40 */
-	uint32_t IV0LR;
-	uint32_t IV0RR;
-	uint32_t IV1LR;
-	uint32_t IV1RR;
-} CRYP;
+	uint32_t DR;
+} __packed RNG;
+
+
+
+/*
+ * Peripheral name:	HASH
+ * Boundary:		0x5006 0400 - 0x5006 07FF
+ */
 
 extern volatile struct {
 	uint32_t CR;
@@ -171,7 +170,48 @@ extern volatile struct {
 	uint32_t _HR3;
 	/* 0x320 */
 	uint32_t _HR4;
-} HASH;
+} __packed HASH;
+
+
+
+/*
+ * Peripheral name:	CRYP
+ * Boundary:		0x5006 0000 - 0x5006 03FF
+ */
+
+extern volatile struct {
+	uint32_t CR;
+	uint32_t SR;
+	uint32_t DIN;
+	uint32_t DOUT;
+	/* 0x10 */
+	uint32_t DMACR;
+	uint32_t IMSCR;
+	uint32_t RISR;
+	uint32_t MISR;
+	/* 0x20 */
+	uint32_t K0LR;
+	uint32_t K0RR;
+	uint32_t K1LR;
+	uint32_t K1RR;
+	/* 0x30 */
+	uint32_t K2LR;
+	uint32_t K2RR;
+	uint32_t K3LR;
+	uint32_t K3RR;
+	/* 0x40 */
+	uint32_t IV0LR;
+	uint32_t IV0RR;
+	uint32_t IV1LR;
+	uint32_t IV1RR;
+} __packed CRYP;
+
+
+
+/*
+ * Peripheral name:	DCMI
+ * Boundary:		0x5005 0000 - 0x5005 03FF
+ */
 
 extern volatile struct {
 	uint32_t CR;
@@ -187,7 +227,14 @@ extern volatile struct {
 	uint32_t CWSTRT;
 	uint32_t CWSIZE;
 	uint32_t DR;
-} DCMI;
+} __packed DCMI;
+
+
+
+/*
+ * Peripheral name:	USB OTG FS
+ * Boundary:		0x5000 0000 - 0x5003 FFFF
+ */
 
 extern volatile struct {
 	uint32_t GOTGCTL;
@@ -394,7 +441,14 @@ extern volatile struct {
 	uint32_t _dummy_54[163];
 	/* 0xE00 */
 	uint32_t PCGCCTL;
-} OTG_FS;
+} __packed OTG_FS;
+
+
+
+/*
+ * Peripheral name:	USB OTG HS
+ * Boundary:		0x4004 0000 - 0x4007 FFFF
+ */
 
 extern volatile struct {
 	uint32_t GOTGCTL;
@@ -702,7 +756,127 @@ extern volatile struct {
 	uint32_t _dummy_54[160];
 	/* 0xE00 */
 	uint32_t PCGCCTL;
-} OTG_HS;
+} __packed OTG_HS;
+
+
+
+/*
+ * Peripheral name:	ETHERNET MAC
+ * Boundaries:
+ * 			0x4002 9000 - 0x4002 93FF
+ * 			0x4002 8C00 - 0x4002 8FFF
+ * 			0x4002 8800 - 0x4002 8BFF
+ * 			0x4002 8400 - 0x4002 87FF
+ * 			0x4002 8000 - 0x4002 83FF
+ */
+
+extern volatile struct {
+	uint32_t CR;
+	uint32_t FFR;
+	uint32_t HTHR;
+	uint32_t HTLR;
+	/* 0x10 */
+	uint32_t MIIAR;
+	uint32_t MIIDR;
+	uint32_t FCR;
+	uint32_t VLANTR;
+	/* 0x20 */
+	uint32_t _dummy_0[2];
+	uint32_t RWUFFR;
+	uint32_t PMTCSR;
+	/* 0x30 */
+	uint32_t _dummy_1;
+	uint32_t DBGR;
+	uint32_t SR;
+	uint32_t IMR;
+	/* 0x40 */
+	uint32_t A0HR;
+	uint32_t A0LR;
+	uint32_t A1HR;
+	uint32_t A1LR;
+	/* 0x50 */
+	uint32_t A2HR;
+	uint32_t A2LR;
+	uint32_t A3HR;
+	uint32_t A3LR;
+} __packed ETH_MAC;
+
+extern volatile struct {
+	uint32_t CR;
+	uint32_t RIR;
+	uint32_t TIR;
+	uint32_t RIMR;
+	/* 0x10 */
+	uint32_t TIMR;
+	/* 0x14 */
+	uint32_t _dummy_0[14];
+	/* 0x4C */
+	uint32_t TGFSCCR;
+	/* 0x50 */
+	uint32_t TGFMSCCR;
+	/* 0x54 */
+	uint32_t _dummy_1[5];
+	/* 0x68 */
+	uint32_t TGFCR;
+	/* 0x6C */
+	uint32_t _dummy_2[10];
+	/* 0x94 */
+	uint32_t RFCECR;
+	uint32_t RFAECR;
+	/* 0x9C */
+	uint32_t _dummy_3[10];
+	/* 0xC4 */
+	uint32_t RGUFCR;
+} __packed ETH_MMC;
+
+extern volatile struct {
+	uint32_t TSCR;
+	uint32_t SSIR;
+	uint32_t TSHR;
+	uint32_t TSLR;
+	/* 0x10 */
+	uint32_t TSHUR;
+	uint32_t TSLUR;
+	uint32_t TSAR;
+	uint32_t TTHR;
+	/* 0x20 */
+	uint32_t TTLR;
+	uint32_t _dummy_0;
+	uint32_t TSSR;
+} __packed ETH_PTP;
+
+extern volatile struct {
+	uint32_t BMR;
+	uint32_t TPDR;
+	uint32_t RPDR;
+	uint32_t RDLAR;
+	/* 0x10 */
+	uint32_t TDLAR;
+	uint32_t SR;
+	uint32_t OMR;
+	uint32_t IER;
+	/* 0x20 */
+	uint32_t MFBOCR;
+	uint32_t RSWTR;
+	/* 0x28 */
+	uint32_t _dummy_0[8];
+	/* 0x48 */
+	uint32_t CHTDR;
+	uint32_t CHRDR;
+	/* 0x50 */
+	uint32_t CHTBAR;
+	uint32_t CHRBAR;
+} __packed ETH_DMA;
+
+
+
+/*
+ * Peripheral name:	DMA2
+ * Boundary:		0x4002 6400 - 0x4002 67FF
+ * 
+ * Peripheral name:	DMA1
+ * Boundary:		0x4002 6000 - 0x4002 63FF
+ */
 
 extern volatile struct {
 	uint32_t LISR;
@@ -769,111 +943,14 @@ extern volatile struct {
 	uint32_t S7M0AR;
 	uint32_t S7M1AR;
 	uint32_t S7FCR;
-} DMA1, DMA2;
+} __packed DMA1, DMA2;
 
-extern volatile struct {
-	uint32_t CR;
-	uint32_t FFR;
-	uint32_t HTHR;
-	uint32_t HTLR;
-	/* 0x10 */
-	uint32_t MIIAR;
-	uint32_t MIIDR;
-	uint32_t FCR;
-	uint32_t VLANTR;
-	/* 0x20 */
-	uint32_t _dummy_0[2];
-	uint32_t RWUFFR;
-	uint32_t PMTCSR;
-	/* 0x30 */
-	uint32_t _dummy_1;
-	uint32_t DBGR;
-	uint32_t SR;
-	uint32_t IMR;
-	/* 0x40 */
-	uint32_t A0HR;
-	uint32_t A0LR;
-	uint32_t A1HR;
-	uint32_t A1LR;
-	/* 0x50 */
-	uint32_t A2HR;
-	uint32_t A2LR;
-	uint32_t A3HR;
-	uint32_t A3LR;
-} ETH_MAC;
 
-extern volatile struct {
-	uint32_t CR;
-	uint32_t RIR;
-	uint32_t TIR;
-	uint32_t RIMR;
-	/* 0x10 */
-	uint32_t TIMR;
-	/* 0x14 */
-	uint32_t _dummy_0[14];
-	/* 0x4C */
-	uint32_t TGFSCCR;
-	/* 0x50 */
-	uint32_t TGFMSCCR;
-	/* 0x54 */
-	uint32_t _dummy_1[5];
-	/* 0x68 */
-	uint32_t TGFCR;
-	/* 0x6C */
-	uint32_t _dummy_2[10];
-	/* 0x94 */
-	uint32_t RFCECR;
-	uint32_t RFAECR;
-	/* 0x9C */
-	uint32_t _dummy_3[10];
-	/* 0xC4 */
-	uint32_t RGUFCR;
-} ETH_MMC;
 
-extern volatile struct {
-	uint32_t TSCR;
-	uint32_t SSIR;
-	uint32_t TSHR;
-	uint32_t TSLR;
-	/* 0x10 */
-	uint32_t TSHUR;
-	uint32_t TSLUR;
-	uint32_t TSAR;
-	uint32_t TTHR;
-	/* 0x20 */
-	uint32_t TTLR;
-	uint32_t _dummy_0;
-	uint32_t TSSR;
-} ETH_PTP;
-
-extern volatile struct {
-	uint32_t BMR;
-	uint32_t TPDR;
-	uint32_t RPDR;
-	uint32_t RDLAR;
-	/* 0x10 */
-	uint32_t TDLAR;
-	uint32_t SR;
-	uint32_t OMR;
-	uint32_t IER;
-	/* 0x20 */
-	uint32_t MFBOCR;
-	uint32_t RSWTR;
-	/* 0x28 */
-	uint32_t _dummy_0[8];
-	/* 0x48 */
-	uint32_t CHTDR;
-	uint32_t CHRDR;
-	/* 0x50 */
-	uint32_t CHTBAR;
-	uint32_t CHRBAR;
-} ETH_DMA;
-
-extern volatile struct {
-	uint32_t DR;
-	uint32_t IDR;
-	uint32_t CR;
-} CRC;
+/*
+ * Peripheral name:	Flash interface register
+ * Boundary:		0x4002 3C00 - 0x4002 3FFF
+ */
 
 extern volatile struct {
 	uint32_t ACR;
@@ -883,7 +960,132 @@ extern volatile struct {
 	/* 0x10 */
 	uint32_t CR;
 	uint32_t OPTCR;
-} FLASH;
+} __packed FLASH;
+
+
+
+/*
+ * Peripheral name:	RCC
+ * Boundary:		0x4002 3800 - 0x4002 3BFF
+ */
+
+extern volatile struct {
+	uint32_t CR;
+	uint32_t PLLCFGR;
+	uint32_t CFGR;
+	uint32_t CIR;
+	/* 0x10 */
+	uint32_t AHB1RSTR;
+	uint32_t AHB2RSTR;
+	uint32_t AHB3RSTR;
+	uint32_t _dummy_0;
+	/* 0x20 */
+	uint32_t APB1RSTR;
+	uint32_t APB2RSTR;
+	uint32_t _dummy_1;
+	uint32_t _dummy_2;
+	/* 0x30 */
+	uint32_t AHB1ENR;
+	uint32_t AHB2ENR;
+	uint32_t AHB3ENR;
+	uint32_t _dummy_3;
+	/* 0x40 */
+	uint32_t APB1ENR;
+	uint32_t APB2ENR;
+	uint32_t _dummy_4;
+	uint32_t _dummy_5;
+	/* 0x50 */
+	uint32_t AHB1LPENR;
+	uint32_t AHB2LPENR;
+	uint32_t AHB3LPENR;
+	uint32_t _dummy_6;
+	/* 0x60 */
+	uint32_t APB1LPENR;
+	uint32_t APB2LPENR;
+	uint32_t _dummy_7;
+	uint32_t _dummy_8;
+	/* 0x70 */
+	uint32_t BDCR;
+	uint32_t CSR;
+	uint32_t _dummy_9;
+	uint32_t _dummy_10;
+	/* 0x80 */
+	uint32_t SSCGR;
+	uint32_t PLLI2SCFGR;
+} __packed RCC;
+
+
+
+/*
+ * Peripheral name:	CRC
+ * Boundary:		0x4002 3000 - 0x4002 33FF
+ */
+
+extern volatile struct {
+	uint32_t DR;
+	uint32_t IDR;
+	uint32_t CR;
+} __packed CRC;
+
+
+
+/*
+ * Peripheral name:	GPIOI
+ * Boundary:		0x4002 2000 - 0x4002 23FF
+ * 
+ * Peripheral name:	GPIOH
+ * Boundary:		0x4002 1C00 - 0x4002 1FFF
+ * 
+ * Peripheral name:	GPIOG
+ * Boundary:		0x4002 1800 - 0x4002 1BFF
+ * 
+ * Peripheral name:	GPIOF
+ * Boundary:		0x4002 1400 - 0x4002 17FF
+ * 
+ * Peripheral name:	GPIOE
+ * Boundary:		0x4002 1000 - 0x4002 13FF
+ * 
+ * Peripheral name:	GPIOD
+ * Boundary:		0x4002 0C00 - 0x4002 0FFF
+ * 
+ * Peripheral name:	GPIOC
+ * Boundary:		0x4002 0800 - 0x4002 0BFF
+ * 
+ * Peripheral name:	GPIOB
+ * Boundary:		0x4002 0400 - 0x4002 07FF
+ * 
+ * Peripheral name:	GPIOA
+ * Boundary:		0x4002 0000 - 0x4002 03FF
+ */
+
+extern volatile struct {
+	uint32_t MODER;
+	uint32_t OTYPER;
+	uint32_t OSPEEDER;
+	uint32_t PUPDR;
+	/* 0x10 */
+	uint32_t IDR;
+	uint32_t ODR;
+	uint32_t BSRR;
+	uint32_t LCKR;
+	/* 0x20 */
+	uint32_t AFRL;
+	uint32_t AFRH;
+} __packed GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOF, GPIOG, GPIOH, GPIOI;
+
+extern volatile struct {
+	uint32_t CR1;
+	uint32_t CR2;
+	uint32_t SR;
+	uint32_t DR;
+	/* 0x10 */
+	uint32_t CRCPR;
+	uint32_t RXCRCR;
+	uint32_t TXCRCR;
+	uint32_t I2SCFGR;
+	/* 0x20 */
+	uint32_t I2SPR;
+} __packed SPI1, SPI2, SPI3, SPI4, SPI5, SPI6;
 
 extern volatile struct {
 	uint32_t POWER;
@@ -912,7 +1114,7 @@ extern volatile struct {
 	uint32_t _dummy_1[13];
 	/* 0x80 */
 	uint32_t FIFO;
-} SDIO;
+} __packed SDIO;
 
 extern volatile struct {
 	uint32_t IMR;
@@ -922,7 +1124,7 @@ extern volatile struct {
 	/* 0x10 */
 	uint32_t SWIER;
 	uint32_t PR;
-} EXTI;
+} __packed EXTI;
 
 extern volatile struct {
 	uint32_t MEMRM;
@@ -935,7 +1137,7 @@ extern volatile struct {
 	uint32_t _dummy_0[2];
 	/* 0x20 */
 	uint32_t CMPCR;
-} SYSCFG;
+} __packed SYSCFG;
 
 /* Timers */
 
@@ -964,7 +1166,7 @@ extern volatile struct {
 	uint32_t BDTR;
 	uint32_t DCR;
 	uint32_t DMAR;
-} TIM1, TIM8;
+} __packed TIM1, TIM8;
 
 extern volatile struct {
 	uint32_t CR1;
@@ -993,7 +1195,7 @@ extern volatile struct {
 	uint32_t DMAR;
 	/* 0x50 */
 	uint32_t OR; /* only TIM2 and TIM5 */
-} TIM2, TIM3, TIM4, TIM5;
+} __packed TIM2, TIM3, TIM4, TIM5;
 
 extern volatile struct {
 	uint32_t CR1;
@@ -1017,7 +1219,7 @@ extern volatile struct {
 	/* 0x3C */
 	uint32_t _dummy_2[5];
 	/* 0x50 */
-} TIM9, TIM12;
+} __packed TIM9, TIM12;
 
 extern volatile struct {
 	uint32_t CR1;
@@ -1040,7 +1242,7 @@ extern volatile struct {
 	uint32_t _dummy_3[6];
 	/* 0x50 */
 	uint32_t OR;
-} TIM10, TIM11, TIM13, TIM14;
+} __packed TIM10, TIM11, TIM13, TIM14;
 
 extern volatile struct {
 	uint32_t CR1;
@@ -1057,7 +1259,7 @@ extern volatile struct {
 	uint32_t CNT;
 	uint32_t PSC;
 	uint32_t ARR;
-} TIM6, TIM7;
+} __packed TIM6, TIM7;
 
 /* ADC */
 
@@ -1086,13 +1288,13 @@ extern volatile struct {
 	uint32_t JDR3;
 	uint32_t JDR4;
 	uint32_t DR;
-} ADC1, ADC2, ADC3;
+} __packed ADC1, ADC2, ADC3;
 
 extern volatile struct {
 	uint32_t CSR;
 	uint32_t CCR;
 	uint32_t CDR;
-} ADC;
+} __packed ADC;
 
 /* USART */
 
@@ -1105,23 +1307,8 @@ extern volatile struct {
 	uint32_t CR2;
 	uint32_t CR3;
 	uint32_t GTPR;
-} USART1, USART2, USART3, UART4, UART5, USART6, UART7, UART8;
+} __packed USART1, USART2, USART3, UART4, UART5, USART6, UART7, UART8;
 
-/* SPI */
-
-extern volatile struct {
-	uint32_t CR1;
-	uint32_t CR2;
-	uint32_t SR;
-	uint32_t DR;
-	/* 0x10 */
-	uint32_t CRCPR;
-	uint32_t RXCRCR;
-	uint32_t TXCRCR;
-	uint32_t I2SCFGR;
-	/* 0x20 */
-	uint32_t I2SPR;
-} SPI1, SPI2, SPI3, SPI4, SPI5, SPI6;
 
 /* I2C */
 
@@ -1138,7 +1325,7 @@ extern volatile struct {
 	/* 0x20 */
 	uint32_t TRISE;
 	uint32_t FLTR;
-} I2C1, I2C2, I2C3;
+} __packed I2C1, I2C2, I2C3;
 
 /* RTC */
 
@@ -1197,7 +1384,7 @@ extern volatile struct {
 		};
 		uint32_t BKP[20];
 	};
-} RTC;
+} __packed RTC;
 
 /* DAC */
 
@@ -1219,72 +1406,157 @@ extern volatile struct {
 	/* 0x30 */
 	uint32_t DOR2;
 	uint32_t SR;
-} DAC;
-
-
+} __packed DAC;
 
 extern volatile struct {
 	uint32_t CR;
-	uint32_t SR;
-	uint32_t DR;
-} RNG;
-
-extern volatile struct {
-	uint32_t MODER;
-	uint32_t OTYPER;
-	uint32_t OSPEEDER;
-	uint32_t PUPDR;
-	/* 0x10 */
-	uint32_t IDR;
-	uint32_t ODR;
-	uint32_t BSRR;
-	uint32_t LCKR;
-	/* 0x20 */
-	uint32_t AFRL;
-	uint32_t AFRH;
-} GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOG, GPIOH, GPIOI;
-
-extern volatile struct {
-	uint32_t CR;
-	uint32_t PLLCFGR;
-	uint32_t CFGR;
-	uint32_t CIR;
-	/* 0x10 */
-	uint32_t AHB1RSTR;
-	uint32_t AHB2RSTR;
-	uint32_t AHB3RSTR;
-	uint32_t _dummy_0;
-	/* 0x20 */
-	uint32_t APB1RSTR;
-	uint32_t APB2RSTR;
-	uint32_t _dummy_1;
-	uint32_t _dummy_2;
-	/* 0x30 */
-	uint32_t AHB1ENR;
-	uint32_t AHB2ENR;
-	uint32_t AHB3ENR;
-	uint32_t _dummy_3;
-	/* 0x40 */
-	uint32_t APB1ENR;
-	uint32_t APB2ENR;
-	uint32_t _dummy_4;
-	uint32_t _dummy_5;
-	/* 0x50 */
-	uint32_t AHB1LPENR;
-	uint32_t AHB2LPENR;
-	uint32_t AHB3LPENR;
-	uint32_t _dummy_6;
-	/* 0x60 */
-	uint32_t APB1LPENR;
-	uint32_t APB2LPENR;
-	uint32_t _dummy_7;
-	uint32_t _dummy_8;
-	/* 0x70 */
-	uint32_t BDCR;
 	uint32_t CSR;
-	uint32_t _dummy_9;
-	uint32_t _dummy_10;
-	/* 0x80 */
-	uint32_t SSCGR;
-	uint32_t PLLI2SCFGR;
-} RCC;
+} __packed PWR;
+
+extern volatile struct {
+	uint32_t KR;
+	uint32_t PR;
+	uint32_t RLR;
+	uint32_t SR;
+} __packed IWDG;
+
+extern volatile struct {
+	uint32_t CR;
+	uint32_t CFR;
+	uint32_t SR;
+} __packed WWDG;
+
+extern volatile struct {
+	uint32_t MCR;
+	uint32_t MSR;
+	uint32_t TSR;
+	uint32_t RF0R;
+	/* 0x10 */
+	uint32_t RF1R;
+	uint32_t IER;
+	uint32_t ESR;
+	uint32_t BTR;
+	/* 0x20 */
+	uint32_t _dummy_0[88];
+	/* 0x180 */
+	uint32_t TI0R;
+	uint32_t TDT0R;
+	uint32_t TDL0R;
+	uint32_t TDH0R;
+	/* 0x190 */
+	uint32_t TI1R;
+	uint32_t TDT1R;
+	uint32_t TDL1R;
+	uint32_t TDH1R;
+	/* 0x1A0 */
+	uint32_t TI2R;
+	uint32_t TDT2R;
+	uint32_t TDL2R;
+	uint32_t TDH2R;
+	/* 0x1B0 */
+	uint32_t RI0R;
+	uint32_t RDT0R;
+	uint32_t RDL0R;
+	uint32_t RDH0R;
+	/* 0x1C0 */
+	uint32_t RI1R;
+	uint32_t RDT1R;
+	uint32_t RDL1R;
+	uint32_t RDH1R;
+	/* 0x1D0 */
+	uint32_t _dummy_1[12];
+	/* 0x200 */
+	uint32_t FMR;
+	uint32_t FM1R;
+	uint32_t _dummy_2;
+	uint32_t FS1R;
+	/* 0x210 */
+	uint32_t _dummy_3;
+	uint32_t FFA1R;
+	uint32_t _dummy_4;
+	uint32_t FA1R;
+	/* 0x220 */
+	uint32_t _dummy_5[8];
+	union {
+		struct {
+			/* 0x240 */
+			uint32_t F0R1;
+			uint32_t F0R2;
+			uint32_t F1R1;
+			uint32_t F1R2;
+			/* 0x250 */
+			uint32_t F2R1;
+			uint32_t F2R2;
+			uint32_t F3R1;
+			uint32_t F3R2;
+			/* 0x260 */
+			uint32_t F4R1;
+			uint32_t F4R2;
+			uint32_t F5R1;
+			uint32_t F5R2;
+			/* 0x270 */
+			uint32_t F6R1;
+			uint32_t F6R2;
+			uint32_t F7R1;
+			uint32_t F7R2;
+			/* 0x280 */
+			uint32_t F8R1;
+			uint32_t F8R2;
+			uint32_t F9R1;
+			uint32_t F9R2;
+			/* 0x290 */
+			uint32_t F10R1;
+			uint32_t F10R2;
+			uint32_t F11R1;
+			uint32_t F11R2;
+			/* 0x2A0 */
+			uint32_t F12R1;
+			uint32_t F12R2;
+			uint32_t F13R1;
+			uint32_t F13R2;
+			/* 0x2B0 */
+			uint32_t F14R1;
+			uint32_t F14R2;
+			uint32_t F15R1;
+			uint32_t F15R2;
+			/* 0x2C0 */
+			uint32_t F16R1;
+			uint32_t F16R2;
+			uint32_t F17R1;
+			uint32_t F17R2;
+			/* 0x2D0 */
+			uint32_t F18R1;
+			uint32_t F18R2;
+			uint32_t F19R1;
+			uint32_t F19R2;
+			/* 0x2E0 */
+			uint32_t F20R1;
+			uint32_t F20R2;
+			uint32_t F21R1;
+			uint32_t F21R2;
+			/* 0x2F0 */
+			uint32_t F22R1;
+			uint32_t F22R2;
+			uint32_t F23R1;
+			uint32_t F23R2;
+			/* 0x300 */
+			uint32_t F24R1;
+			uint32_t F24R2;
+			uint32_t F25R1;
+			uint32_t F25R2;
+			/* 0x310 */
+			uint32_t F26R1;
+			uint32_t F26R2;
+			uint32_t F27R1;
+			uint32_t F27R2;
+		};
+		/* 0x240 */
+		struct {
+			uint32_t R1;
+			uint32_t R2;
+		} F[28];
+		/* 0x320 */
+	};
+} __packed CAN1, CAN2;
+
+
