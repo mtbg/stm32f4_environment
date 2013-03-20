@@ -1,3 +1,6 @@
+#ifndef __STM32F4_PERIPH_H
+#define __STM32F4_PERIPH_H
+
 #include <stdint.h>
 
 #define __packed __attribute__((packed))
@@ -1771,3 +1774,4 @@ extern volatile struct {
 } __packed CAN1, CAN2;
 
 
+#endif
