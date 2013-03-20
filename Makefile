@@ -8,7 +8,7 @@ CC=$(TOOLCHAIN_PREFIX)gcc
 LD=$(TOOLCHAIN_PREFIX)gcc
 OBJCOPY=$(TOOLCHAIN_PREFIX)objcopy
 OBJDUMP=$(TOOLCHAIN_PREFIX)objdump
-CFLAGS=-mthumb -mcpu=$(TARGET_CPU) -Wl,--gc-sections
+CFLAGS=-mthumb -mcpu=$(TARGET_CPU) -Wl,--no-gc-sections -O2 -g
 LD_SCRIPT=script.ld
 
 all: $(TARGET).elf $(TARGET).bin $(TARGET).hex
@@ -20,7 +20,7 @@ all: $(TARGET).elf $(TARGET).bin $(TARGET).hex
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TARGET).elf: $(OBJS) $(STARTUP)
-	$(LD) $(CFLAGS) -T$(LD_SCRIPT) $^ -o $@
+	$(LD) $(CFLAGS) -T$(LD_SCRIPT) -nodefaultlibs -nostartfiles $^ -o $@
 
 %.hex: %.elf
 	$(OBJCOPY) -O ihex $< $@
@@ -29,7 +29,7 @@ $(TARGET).elf: $(OBJS) $(STARTUP)
 	$(OBJCOPY) -O binary $< $@
 
 dump: $(TARGET).elf
-	$(OBJDUMP) -d $<
+	$(OBJDUMP) -d -S $<
 
 dump_all: $(TARGET).elf
 	$(OBJDUMP) -D $<

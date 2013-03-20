@@ -239,23 +239,95 @@ extern volatile struct {
 extern volatile struct {
 	uint32_t GOTGCTL;
 	uint32_t GOTGINT;
+#define OTG_FS_GINTMSK (1<<0)
+#define OTG_FS_TXFELVL (1<<7)
+#define OTG_FS_PTXFELVL (1<<8)
 	uint32_t GAHBCFG;
+#define OTG_FS_TOCAL(x) ((x))
+#define OTG_FS_PHYSEL (1<<6)
+#define OTG_FS_SRPCAP (1<<8)
+#define OTG_FS_HNPCAP (1<<9)
+#define OTG_FS_TRDT(x) ((x)<<10)
+#define OTG_FS_FHMOD (1<<29)
+#define OTG_FS_FDMOD (1<<30)
+#define OTG_FS_CTXPKT (1<<31)
 	uint32_t GUSBCFG;
 	/* 0x10 */
 	uint32_t GRSTCTL;
+#define OTG_FS_CMOD (1<<0)
+#define OTG_FS_MMIS (1<<1)
+#define OTG_FS_OTGINT (1<<2)
+#define OTG_FS_SOF (1<<3)
+#define OTG_FS_RXFLVL (1<<4)
+#define OTG_FS_NPTXFE (1<<5)
+#define OTG_FS_GINAKEFF (1<<6)
+#define OTG_FS_GONAKEFF (1<<7)
+#define OTG_FS_ESUSP (1<<10)
+#define OTG_FS_USBSUSB (1<<11)
+#define OTG_FS_USBRST (1<<12)
+#define OTG_FS_ENUMDNE (1<<13)
+#define OTG_FS_ISOODRP (1<<14)
+#define OTG_FS_EOPF (1<<15)
+#define OTG_FS_IEPINT (1<<18)
+#define OTG_FS_OEPINT (1<<19)
+#define OTG_FS_IISOIXFER (1<<20)
+#define OTG_FS_IPXFR (1<<21)
+#define OTG_FS_INCOMPISOUT (1<<21)
+#define OTG_FS_HPRTINT (1<<24)
+#define OTG_FS_HCINT (1<<25)
+#define OTG_FS_PTXFE (1<<26)
+#define OTG_FS_CIDSCHG (1<<28)
+#define OTG_FS_DISINT (1<<29)
+#define OTG_FS_SQRINT (1<<30)
+#define OTG_FS_WKUINT (1<<31)
 	uint32_t GINTSTS;
+#define OTG_FS_MMISM (1<<1)
+#define OTG_FS_OTGINTM (1<<2)
+#define OTG_FS_SOFM (1<<3)
+#define OTG_FS_RXFLVLM (1<<4)
+#define OTG_FS_NPTXFEM (1<<5)
+#define OTG_FS_GINAKEFFM (1<<6)
+#define OTG_FS_GONAKEFFM (1<<7)
+#define OTG_FS_ESUSPM (1<<10)
+#define OTG_FS_USBSUSBM (1<<11)
+#define OTG_FS_USBRSTM (1<<12)
+#define OTG_FS_ENUMDNEM (1<<13)
+#define OTG_FS_ISOODRPM (1<<14)
+#define OTG_FS_EOPFM (1<<15)
+#define OTG_FS_IEPINTM (1<<18)
+#define OTG_FS_OEPINTM (1<<19)
+#define OTG_FS_IISOIXFERM (1<<20)
+#define OTG_FS_IPXFRM (1<<21)
+#define OTG_FS_INCOMPISOUTM (1<<21)
+#define OTG_FS_HPRTINTM (1<<24)
+#define OTG_FS_HCINTM (1<<25)
+#define OTG_FS_PTXFEM (1<<26)
+#define OTG_FS_CIDSCHGM (1<<28)
+#define OTG_FS_DISINTM (1<<29)
+#define OTG_FS_SQRINTM (1<<30)
+#define OTG_FS_WKUINTM (1<<31)
 	uint32_t GINTMSK;
 	uint32_t GRXSTSR;
 	/* 0x20 */
-	uint32_t GRXSTSPR; /* check */
+	uint32_t GRXSTSP;
+#define OTG_FS_RXFD(x) ((x))
 	uint32_t GRXFSIZ;
 	union {
+#define OTG_FS_NPTXFSA(x) ((x))
+#define OTG_FS_NPTXFD(x) ((x)<<16)
 		uint32_t HNPTXFSIZ;
+#define OTG_FS_TX0FSA(x) ((x))
+#define OTG_FS_TX0FD(x) ((x)<<16)
 		uint32_t DIEPTXF0;
 	};
 	uint32_t HNPTXSTS;
 	/* 0x30 */
 	uint32_t _dummy_0[2];
+#define OTG_FS_PWRDWN (1<<16)
+#define OTG_FS_VBUSASEN (1<<18)
+#define OTG_FS_VBUSBEN (1<<19)
+#define OTG_FS_SOFOUTEN (1<<20)
+#define OTG_FS_NOVBUSSENS (1<<21)
 	uint32_t GCCFG;
 	uint32_t CID;
 	/* 0x40 */
@@ -347,14 +419,40 @@ extern volatile struct {
 	uint32_t HCTSIZ7;
 	uint32_t _dummy_21[131];
 	/* 0x800 */
+#define OTG_FS_DSPD(x) ((x))
+#define OTG_FS_NZLSOHSK (1<<2)
+#define OTG_FS_DAD(x) ((x)<<4)
+#define OTG_FS_PFIVL(x) ((x)<<11)
 	uint32_t DCFG;
+#define OTG_FS_RWUSIG (1<<0)
+#define OTG_FS_SDIS (1<<1)
+#define OTG_FS_GINSTS (1<<2)
+#define OTG_FS_GONSTS (1<<3)
+#define OTG_FS_TCTL(x) ((x)<<4)
+#define OTG_FS_SGINAK (1<<7)
+#define OTG_FS_CGINAK (1<<8)
+#define OTG_FS_SGONAK (1<<9)
+#define OTG_FS_CGONAK (1<<10)
+#define OTG_FS_POPRGDNE (1<<11)
 	uint32_t DCTL;
 	uint32_t DSTS;
 	uint32_t _dummy_22;
 	/* 0x810 */
+#define OTG_FS_XFRCM (1<<0)
+#define OTG_FS_EPDM (1<<1)
+#define OTG_FS_TOM (1<<3)
+#define OTG_FS_STUPM (1<<3)
+#define OTG_FS_ITTXFEMSK (1<<4)
+#define OTG_FS_OTEPDM (1<<4)
+#define OTG_FS_INEPNMM (1<<5)
+#define OTG_FS_INEPNEM (1<<6)
 	uint32_t DIEPMSK;
 	uint32_t DOEPMSK;
+#define OTG_FS_DIEPINT(x) ((x))
+#define OTG_FS_DOEPINT(x) ((x)<<16)
 	uint32_t DAINT;
+#define OTG_FS_IEPM(x) ((x))
+#define OTG_FS_OEPM(x) ((x)<<16)
 	uint32_t DAINTMSK;
 	/* 0x820 */
 	uint32_t _dummy_23[2];
@@ -366,11 +464,32 @@ extern volatile struct {
 	/* 0x838 */
 	uint32_t _dummy_25[50];
 	/* 0x900 */
+#define OTG_FS_MPSIZ(x) ((x))
+#define OTG_FS_USBAEP (1<<15)
+#define OTG_FS_EONUM (1<<16)
+#define OTG_FS_DPID (1<<16)
+#define OTG_FS_NAKSTS (1<<17)
+#define OTG_FS_EPTYP(x) (x<<18)
+#define OTG_FS_SNPM (1<<20)
+#define OTG_FS_STALL  (1<<21)
+#define OTG_FS_TXFNUM(x) ((x)<<22)
+#define OTG_FS_CNAK (1<<26)
+#define OTG_FS_SNAK (1<<27)
+#define OTG_FS_SD0PID (1<<28)
+#define OTG_FS_SEVENFRM (1<<28)
+#define OTG_FS_SODDFRM (1<<29)
+#define OTG_FS_EPDIS (1<<30)
+#define OTG_FS_EPENA (1<<31)
 	uint32_t DIEPCTL0;
 	uint32_t _dummy_26;
 	uint32_t DIEPINT0;
 	uint32_t _dummy_27;
 	/* 0x910 */
+#define OTG_FS_XFRSIZ(x) ((x))
+#define OTG_FS_PKTCNT(x) ((x)<<19)
+#define OTG_FS_MCNT(x) ((x)<<29)
+#define OTG_FS_STUPCNT(x) ((x)<<29)
+#define OTG_FS_RXDPID(x) ((x)<<29)
 	uint32_t DIEPTSIZ0;
 	uint32_t _dummy_28;
 	uint32_t DTXFSTS0;
@@ -756,6 +875,32 @@ extern volatile struct {
 	uint32_t _dummy_54[160];
 	/* 0xE00 */
 	uint32_t PCGCCTL;
+	uint32_t _dummy_55[127];
+	/* 0x1000 */
+	uint32_t DFIFO0[1024];
+	/* 0x2000 */
+	uint32_t DFIFO1[1024];
+	/* 0x3000 */
+	uint32_t DFIFO2[1024];
+	/* 0x4000 */
+	uint32_t DFIFO3[1024];
+	/* 0x5000 */
+	uint32_t DFIFO4[1024];
+	/* 0x6000 */
+	uint32_t DFIFO5[1024];
+	/* 0x7000 */
+	uint32_t DFIFO6[1024];
+	/* 0x8000 */
+	uint32_t DFIFO7[1024];
+	/* 0x9000 */
+	uint32_t DFIFO8[1024];
+	/* 0xA000 */
+	uint32_t DFIFO9[1024];
+	/* 0xB000 */
+	uint32_t DFIFO10[1024];
+	/* 0xC000 */
+	uint32_t DFIFO11[1024];
+	/* 0xD000 */
 } __packed OTG_HS;
 
 
@@ -970,8 +1115,34 @@ extern volatile struct {
  */
 
 extern volatile struct {
+#define RCC_HSION (1<<0)
+#define RCC_HSIRDY (1<<1)
+#define RCC_HSITRIM(x) ((x)<<3)
+#define RCC_HSEON (1<<16)
+#define RCC_HSERDY (1<<17)
+#define RCC_HSEBYP (1<<18)
+#define RCC_CSSON (1<<19)
+#define RCC_PLLON (1<<24)
+#define RCC_PLLRDY (1<<25)
+#define RCC_PLLI2SON (1<<26)
+#define RCC_PLLI2SRDY (1<<27)
 	uint32_t CR;
+#define RCC_PLLM(x) ((x))
+#define RCC_PLLN(x) ((x)<<6)
+#define RCC_PLLP(x) ((x)<<16)
+#define RCC_PLLSRC (1<<22)
+#define RCC_PLLQ(x) ((x)<<24)
 	uint32_t PLLCFGR;
+#define RCC_SW(x) ((x))
+#define RCC_HPRE(x) ((x)<<4)
+#define RCC_PPRE1(x) ((x)<<10)
+#define RCC_PPRE2(x) ((x)<<13)
+#define RCC_RTCPRE(x) ((x)<<16)
+#define RCC_MCO1(x) ((x)<<21)
+#define RCC_I2SSRC (1<<23)
+#define RCC_MCO1PRE(x) ((x)<<24)
+#define RCC_MCO2PRE(x) ((x)<<27)
+#define RCC_MCO2(x) ((x)<<30)
 	uint32_t CFGR;
 	uint32_t CIR;
 	/* 0x10 */
@@ -986,6 +1157,11 @@ extern volatile struct {
 	uint32_t _dummy_2;
 	/* 0x30 */
 	uint32_t AHB1ENR;
+#define RCC_DCMIEN (1<<0)
+#define RCC_CRYPEN (1<<4)
+#define RCC_HASHEN (1<<5)
+#define RCC_RNGEN (1<<6)
+#define RCC_OTGFSEN (1<<7)
 	uint32_t AHB2ENR;
 	uint32_t AHB3ENR;
 	uint32_t _dummy_3;
@@ -1059,6 +1235,23 @@ extern volatile struct {
  */
 
 extern volatile struct {
+#define _GPIO_MODER(n, x) ((x)<<((n)*2))
+#define GPIO_MODER0(x) _GPIO_MODER(0, x)
+#define GPIO_MODER1(x) _GPIO_MODER(1, x)
+#define GPIO_MODER2(x) _GPIO_MODER(2, x)
+#define GPIO_MODER3(x) _GPIO_MODER(3, x)
+#define GPIO_MODER4(x) _GPIO_MODER(4, x)
+#define GPIO_MODER5(x) _GPIO_MODER(5, x)
+#define GPIO_MODER6(x) _GPIO_MODER(6, x)
+#define GPIO_MODER7(x) _GPIO_MODER(7, x)
+#define GPIO_MODER8(x) _GPIO_MODER(8, x)
+#define GPIO_MODER9(x) _GPIO_MODER(9, x)
+#define GPIO_MODER10(x) _GPIO_MODER(10, x)
+#define GPIO_MODER11(x) _GPIO_MODER(11, x)
+#define GPIO_MODER12(x) _GPIO_MODER(12, x)
+#define GPIO_MODER13(x) _GPIO_MODER(13, x)
+#define GPIO_MODER14(x) _GPIO_MODER(14, x)
+#define GPIO_MODER15(x) _GPIO_MODER(15, x)
 	uint32_t MODER;
 	uint32_t OTYPER;
 	uint32_t OSPEEDER;
@@ -1069,7 +1262,24 @@ extern volatile struct {
 	uint32_t BSRR;
 	uint32_t LCKR;
 	/* 0x20 */
+#define _GPIO_AFR(n, x) ((x)<<((n)*4))
+#define GPIO_AFRL0(x) _GPIO_AFR(0, x)
+#define GPIO_AFRL1(x) _GPIO_AFR(1, x)
+#define GPIO_AFRL2(x) _GPIO_AFR(2, x)
+#define GPIO_AFRL3(x) _GPIO_AFR(3, x)
+#define GPIO_AFRL4(x) _GPIO_AFR(4, x)
+#define GPIO_AFRL5(x) _GPIO_AFR(5, x)
+#define GPIO_AFRL6(x) _GPIO_AFR(6, x)
+#define GPIO_AFRL7(x) _GPIO_AFR(7, x)
 	uint32_t AFRL;
+#define GPIO_AFRH8(x) _GPIO_AFR(0, x)
+#define GPIO_AFRH9(x) _GPIO_AFR(1, x)
+#define GPIO_AFRH10(x) _GPIO_AFR(2, x)
+#define GPIO_AFRH11(x) _GPIO_AFR(3, x)
+#define GPIO_AFRH12(x) _GPIO_AFR(4, x)
+#define GPIO_AFRH13(x) _GPIO_AFR(5, x)
+#define GPIO_AFRH14(x) _GPIO_AFR(6, x)
+#define GPIO_AFRH15(x) _GPIO_AFR(7, x)
 	uint32_t AFRH;
 } __packed GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOF, GPIOG, GPIOH, GPIOI;
 
@@ -1078,6 +1288,7 @@ extern volatile struct {
 	uint32_t CR2;
 	uint32_t SR;
 	uint32_t DR;
+#define GPIO_MODER0(x) _GPIO_MODER(0, x)
 	/* 0x10 */
 	uint32_t CRCPR;
 	uint32_t RXCRCR;

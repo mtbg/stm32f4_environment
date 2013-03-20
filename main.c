@@ -4,7 +4,7 @@ void main(void) {
 	volatile int i;
 	int j;
 	RCC.CR |= 1<<24;
-	RCC.AHB1ENR |= 1<<3;
+	RCC.AHB1ENR |= 1<<3 | 1;
 	RCC.AHB2ENR |= 1<<6;
 	RNG.CR |= 1<<2;
 	GPIOD.MODER = 0x55 << (12*2);
